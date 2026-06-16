@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#0F0F0E" />
+<meta name="theme-color" content="#F4F0E8" />
 <title>Kristian Bundgaard — Ideamaker</title>
 <meta name="description" content="Kristian Bundgaard is an ideamaker and artist. Same truth, different forms. A manifesto that happens to have a contact button." />
 <meta name="author" content="Kristian Bundgaard" />
@@ -12,7 +12,7 @@
 <meta property="og:title" content="Kristian Bundgaard — Ideamaker" />
 <meta property="og:description" content="What does the world need more of? Health. Same truth, different forms." />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F0F0E'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='54' fill='%23C9A35B' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F4F0E8'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='54' fill='%23DB8043' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
 
 <style>
   /* ============================================================
@@ -31,11 +31,11 @@
      TOKENS
      ============================================================ */
   :root {
-    --bg:    #0F0F0E;
-    --fg:    #F0EDE8;
-    --dim:   #908b81;     /* muted off-white for secondary text */
-    --faint: #4a473f;     /* hairlines */
-    --accent:#C9A35B;     /* lamplight gold — used sparingly */
+    --bg:    #F4F0E8;     /* warm paper */
+    --fg:    #17150F;     /* warm near-black */
+    --dim:   #6f6859;     /* muted secondary text */
+    --faint: #d8cfbd;     /* hairlines */
+    --accent:#DB8043;     /* warm sunset / sunrise — used sparingly */
 
     --serif: "Playfair Display", Georgia, "Times New Roman", serif;
     --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -82,7 +82,6 @@
     position:fixed; inset:0 0 auto 0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
     padding:clamp(1.2rem,3vw,2rem) var(--pad);
-    mix-blend-mode:difference;
   }
   .nav__brand { font-family:var(--serif); font-size:1.05rem; letter-spacing:0.02em; }
   .nav__menu { display:flex; gap:clamp(1.1rem, 3vw, 2.4rem); }
@@ -214,20 +213,33 @@
     font-family:var(--serif); font-weight:400;
     font-size:clamp(2.4rem, 9vw, 6rem); line-height:1.05;
   }
+  /* Get-in-touch button — fill sweep + label swap to the Instagram handle */
   .contact__btn {
+    position:relative; isolation:isolate; overflow:hidden;
     display:inline-block; margin-top:clamp(2rem,5vw,3rem);
-    font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase;
-    padding:1.1rem 2.6rem; border:1px solid var(--faint); border-radius:100px;
-    transition:border-color 0.5s var(--ease), color 0.5s var(--ease), background 0.5s var(--ease);
+    font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg);
+    padding:1.15rem 2.8rem; min-width:15rem; border:1px solid var(--accent); border-radius:100px;
+    transition:color 0.5s var(--ease);
   }
-  .contact__btn:hover, .contact__btn:focus-visible { border-color:var(--accent); color:var(--accent); }
-  .contact__links {
-    margin-top:clamp(2.5rem,6vw,3.5rem); display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
-    font-size:0.9rem; color:var(--dim);
+  .contact__btn .btn__fill {
+    position:absolute; inset:0; z-index:-1; background:var(--accent);
+    transform:translateY(101%); border-radius:inherit;
+    transition:transform 0.6s var(--ease);
   }
-  .contact__links a { position:relative; }
-  .contact__links a::after { content:""; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:var(--accent); transition:width 0.45s var(--ease); }
-  .contact__links a:hover::after { width:100%; }
+  .contact__btn:hover .btn__fill,
+  .contact__btn:focus-visible .btn__fill { transform:translateY(0); }
+  .contact__btn:hover, .contact__btn:focus-visible { color:var(--bg); }
+  .contact__btn .btn__text { position:relative; display:block; height:1.1em; overflow:hidden; }
+  .contact__btn .btn__line {
+    display:flex; align-items:center; justify-content:center; gap:0.5em; white-space:nowrap;
+    transition:transform 0.55s var(--ease);
+  }
+  .contact__btn .btn__line--out { position:absolute; inset:0; transform:translateY(115%); }
+  .contact__btn:hover .btn__line--in,
+  .contact__btn:focus-visible .btn__line--in { transform:translateY(-115%); }
+  .contact__btn:hover .btn__line--out,
+  .contact__btn:focus-visible .btn__line--out { transform:translateY(0); }
+  .contact__btn .btn__line svg { transform:translateY(-0.04em); }
 
   /* ============================================================
      FOOTER
@@ -315,7 +327,7 @@
         </button>
         <div class="idea__panel">
           <div class="idea__panel-inner">
-            <p class="idea__desc">A decision clarity engine. Not a chatbot. For the moment something actually matters — when the choice is yours and the cost is real.</p>
+            <p class="idea__desc">An app to clear your mind. Not a chatbot. For the moment something actually matters — when the choice is yours and the cost is real.</p>
           </div>
         </div>
       </div>
@@ -364,8 +376,6 @@
         <p data-anim>I create things.</p>
         <p data-anim>The approach is intentional play.</p>
         <p data-anim>Mediums vary according to message.</p>
-        <p class="small" data-anim>But one ambition:</p>
-        <p class="accent" data-anim>Health.</p>
       </div>
       <div class="about__disc" data-anim>
         Concept Development · Creative Direction · Strategy · Design · Writing
@@ -378,11 +388,16 @@
     <div class="wrap">
       <p class="contact__ethos" data-anim>Sacred, but never solemn.<br />The only thing I take seriously is <em>play.</em></p>
       <h2 data-anim>An idea worth sharing?</h2>
-      <a class="contact__btn" href="https://kristianbundgaard.com" target="_blank" rel="noopener" data-anim>Get in touch</a>
-      <div class="contact__links" data-anim>
-        <a href="https://kristianbundgaard.com" target="_blank" rel="noopener">kristianbundgaard.com</a>
-        <a href="https://instagram.com/kridi" target="_blank" rel="noopener">Instagram — @kridi</a>
-      </div>
+      <a class="contact__btn" href="https://instagram.com/kridi" target="_blank" rel="noopener" aria-label="Get in touch on Instagram, @kridi" data-anim>
+        <span class="btn__fill" aria-hidden="true"></span>
+        <span class="btn__text" aria-hidden="true">
+          <span class="btn__line btn__line--in">Get in touch</span>
+          <span class="btn__line btn__line--out">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+            <span>@kridi</span>
+          </span>
+        </span>
+      </a>
     </div>
   </section>
 
@@ -390,7 +405,6 @@
 
 <footer class="footer">
   <span class="footer__mark">Kristian Bundgaard</span>
-  <span>Same truth. Different forms.</span>
   <span>© 2026</span>
 </footer>
 
