@@ -1,62 +1,63 @@
-# Aria Solenne — UI/UX Designer Portfolio
+# Kristian Bundgaard — Ideamaker
 
-An awwwards-style landing page for a fictional independent UI/UX designer.
-Built as a self-contained static site with an immersive WebGL background,
-buttery smooth scrolling, and choreographed scroll-driven motion.
+A portfolio that is not a portfolio.
+It is a manifesto that happens to have a contact button.
 
-![Hero](https://img.shields.io/badge/status-live-e8553f) ![Deps](https://img.shields.io/badge/runtime%20deps-none-1faa6b)
+> *What does the world need more of?*
+> **Health.**
 
-## ✦ Highlights
+## ✦ The feeling
 
-- **WebGL hero background** — a full-screen GLSL shader (domain-warped
-  simplex noise) that reacts to the pointer and scroll position, rendered
-  with Three.js. Degrades gracefully if WebGL is unavailable.
-- **Smooth scroll** — Lenis-powered inertia scrolling, synced into GSAP
-  ScrollTrigger.
-- **Choreographed motion** — preloader, masked text reveals line-by-line,
-  staggered hero intro, scroll parallax, animated stat counters, and a
-  scroll-reactive marquee, all via GSAP.
-- **Custom cursor** — blend-mode cursor with contextual labels, magnetic
-  buttons, and a project preview that follows the pointer.
-- **Fully responsive** — fluid `clamp()` typography, a single-column mobile
-  layout, and a full-screen animated mobile menu.
-- **Accessible & resilient** — honors `prefers-reduced-motion`, keeps the
-  cursor native on touch devices, and works even if the JS libraries fail
-  to load.
+Like entering a dark library at 11pm. Everything is still, everything in its
+place. One person who knows exactly what they want to say to you. Not loud,
+not a gallery, not a brochure — calm, intentional, memorable. Sacred, but
+never solemn.
 
-## ✦ Tech
+## ✦ Design
 
-| Concern        | Tool                          |
-|----------------|-------------------------------|
-| 3D / shaders   | Three.js (r128)               |
-| Animation      | GSAP 3 + ScrollTrigger        |
-| Smooth scroll  | Lenis                         |
-| Type           | Fraunces (serif) + Space Grotesk |
-
-All libraries are **vendored locally** in `js/vendor/`, so the site has no
-external runtime dependencies and runs fully offline (fonts load from
-Google Fonts with system-serif/sans fallbacks).
-
-## ✦ Run it
-
-It's a static site — just serve the folder:
-
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
+- **Near-black** `#0F0F0E` ground, **off-white** `#F0EDE8` text, a single
+  **lamplight-gold** accent `#C9A35B` used sparingly.
+- Editorial serif (**Playfair Display**) for voice; clean sans (**Inter**)
+  for body.
+- No gradients, no decoration, no spectacle. Only typography, space and
+  intention.
 
 ## ✦ Structure
 
-```
-index.html        # markup + content
-css/style.css     # design tokens, layout, responsive rules
-js/webgl.js       # Three.js shader background
-js/main.js        # Lenis + GSAP interactions
-js/vendor/        # vendored gsap, scrolltrigger, lenis, three
+1. **Hero** — the question, its answer, the name. Nothing else.
+2. **Credo** — *"I don't build answers. I build better questions."*
+3. **The ideas** — Claire · The Daily Reader · The Human Renaissance
+   (accordion, one open at a time).
+4. **About** — five lines, one ambition: Health.
+5. **Contact** — *Sacred, but never solemn.* → Get in touch.
+
+Content is drawn from Kristian's own words — *"Same truth. Different forms."*,
+*The Multiplier* thesis, and his work-in-progress book *The Renaissance*.
+
+## ✦ Motion
+
+GSAP + ScrollTrigger, used quietly:
+- Slow, deliberate staggered fade-in on load (question → answer → name).
+- Scroll-triggered reveals — each section enters calmly.
+- Smooth accordion expansion; hover is a subtle underline / colour shift only.
+
+No parallax. No scroll-jacking. Honors `prefers-reduced-motion`.
+
+## ✦ Technical
+
+- A single `index.html` with embedded CSS and JS — no frameworks, no build step.
+- **Self-hosted** fonts (`assets/fonts/`) and a **local** copy of GSAP +
+  ScrollTrigger (`js/vendor/`), so the site loads fast and works fully
+  offline with zero external runtime dependencies.
+- Mobile-first and responsive — verified at 375px and on desktop.
+
+## ✦ Run it
+
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
-## ✦ Notes
+---
 
-This is a fictional portfolio created as a design/engineering showcase.
-"Aria Solenne", the projects, and all copy are invented.
+*Same truth. Different forms.*

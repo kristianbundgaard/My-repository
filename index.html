@@ -1,288 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <title>Aria Solenne — Designer of Interfaces & Feeling</title>
-  <meta name="description" content="Aria Solenne is an independent UI/UX designer crafting digital products with clarity, motion, and soul. Selected works, services, and studio philosophy." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0F0F0E" />
+<title>Kristian Bundgaard — Ideamaker</title>
+<meta name="description" content="Kristian Bundgaard is an ideamaker and artist. Same truth, different forms. A manifesto that happens to have a contact button." />
+<meta name="author" content="Kristian Bundgaard" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Aria Solenne — UI/UX Designer" />
-  <meta property="og:description" content="Crafting digital products with clarity, motion, and soul." />
-  <meta property="og:type" content="website" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Kristian Bundgaard — Ideamaker" />
+<meta property="og:description" content="What does the world need more of? Health. Same truth, different forms." />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-style='italic' font-size='62' fill='%23e8553f' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230F0F0E'/%3E%3Ctext x='50' y='70' font-family='Georgia,serif' font-size='54' fill='%23C9A35B' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     FONTS — self-hosted (Playfair Display + Inter)
+     ============================================================ */
+  @font-face { font-family:"Playfair Display"; font-style:normal; font-weight:400; font-display:swap; src:url("assets/fonts/playfair-display-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family:"Playfair Display"; font-style:normal; font-weight:500; font-display:swap; src:url("assets/fonts/playfair-display-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family:"Playfair Display"; font-style:normal; font-weight:600; font-display:swap; src:url("assets/fonts/playfair-display-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family:"Playfair Display"; font-style:italic; font-weight:400; font-display:swap; src:url("assets/fonts/playfair-display-latin-400-italic.woff2") format("woff2"); }
+  @font-face { font-family:"Playfair Display"; font-style:italic; font-weight:500; font-display:swap; src:url("assets/fonts/playfair-display-latin-500-italic.woff2") format("woff2"); }
+  @font-face { font-family:"Inter"; font-style:normal; font-weight:300; font-display:swap; src:url("assets/fonts/inter-latin-300-normal.woff2") format("woff2"); }
+  @font-face { font-family:"Inter"; font-style:normal; font-weight:400; font-display:swap; src:url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family:"Inter"; font-style:normal; font-weight:500; font-display:swap; src:url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); }
 
-  <link rel="stylesheet" href="css/style.css" />
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+  :root {
+    --bg:    #0F0F0E;
+    --fg:    #F0EDE8;
+    --dim:   #908b81;     /* muted off-white for secondary text */
+    --faint: #4a473f;     /* hairlines */
+    --accent:#C9A35B;     /* lamplight gold — used sparingly */
+
+    --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --pad: clamp(1.5rem, 6vw, 7rem);
+    --maxw: 1100px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ============================================================
+     RESET
+     ============================================================ */
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body {
+    background:var(--bg); color:var(--fg);
+    font-family:var(--sans); font-weight:300;
+    line-height:1.6; letter-spacing:0.01em;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+  a { color:inherit; text-decoration:none; }
+  ::selection { background:var(--accent); color:var(--bg); }
+  button { font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+
+  /* Anti-FOUC: hide animated bits until JS marks ready (unless no-JS) */
+  .js [data-anim] { opacity:0; }
+
+  /* ============================================================
+     LAYOUT
+     ============================================================ */
+  .wrap { max-width:var(--maxw); margin-inline:auto; padding-inline:var(--pad); }
+  section { padding-block:clamp(6rem, 16vh, 11rem); }
+
+  .eyebrow {
+    font-size:0.72rem; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--dim); font-weight:400;
+  }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  .nav {
+    position:fixed; inset:0 0 auto 0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:clamp(1.2rem,3vw,2rem) var(--pad);
+    mix-blend-mode:difference;
+  }
+  .nav__brand { font-family:var(--serif); font-size:1.05rem; letter-spacing:0.02em; }
+  .nav__menu { display:flex; gap:clamp(1.1rem, 3vw, 2.4rem); }
+  .nav__link {
+    font-size:0.82rem; letter-spacing:0.04em; color:var(--fg); position:relative; padding-block:0.3rem;
+  }
+  .nav__link::after {
+    content:""; position:absolute; left:0; bottom:0.1rem; height:1px; width:0; background:currentColor;
+    transition:width 0.5s var(--ease);
+  }
+  .nav__link:hover::after, .nav__link:focus-visible::after { width:100%; }
+  .nav__sep { color:var(--dim); font-size:0.82rem; align-self:center; }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height:100svh; display:flex; flex-direction:column; justify-content:center;
+    padding-block:8rem 4rem;
+  }
+  .hero__q {
+    font-family:var(--serif); font-weight:400; font-style:italic;
+    font-size:clamp(1.5rem, 4.2vw, 3rem); line-height:1.25; color:var(--fg);
+    max-width:18ch;
+  }
+  .hero__a {
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(4.5rem, 19vw, 13rem); line-height:0.92; letter-spacing:-0.02em;
+    margin-top:clamp(1.2rem, 3vw, 2.2rem); color:var(--accent);
+  }
+  .hero__name {
+    margin-top:clamp(2rem, 5vw, 3.2rem);
+    display:flex; align-items:baseline; gap:1rem; flex-wrap:wrap;
+  }
+  .hero__name b { font-weight:400; font-size:1rem; letter-spacing:0.02em; }
+  .hero__name span { font-size:0.72rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--dim); }
+
+  /* ============================================================
+     CREDO
+     ============================================================ */
+  .credo { border-top:1px solid var(--faint); }
+  .credo__inner { max-width:24ch; }
+  .credo p {
+    font-family:var(--serif); font-weight:400; line-height:1.3;
+    font-size:clamp(1.6rem, 5vw, 3rem);
+  }
+  .credo p + p { margin-top:0.9rem; }
+  .credo .dim { color:var(--dim); font-size:clamp(1.15rem, 3vw, 1.7rem); font-style:italic; }
+  .credo .turn em { font-style:italic; color:var(--accent); }
+
+  /* ============================================================
+     IDEAS
+     ============================================================ */
+  .ideas { border-top:1px solid var(--faint); }
+  .ideas__head { margin-bottom:clamp(3rem, 8vw, 5rem); }
+  .ideas__head h2 { font-family:var(--serif); font-weight:500; font-size:clamp(2.2rem, 7vw, 4rem); line-height:1; }
+  .ideas__head p { color:var(--dim); font-style:italic; font-family:var(--serif); font-size:clamp(1rem,2.6vw,1.4rem); margin-top:0.8rem; }
+
+  .idea { border-top:1px solid var(--faint); }
+  .idea:last-of-type { border-bottom:1px solid var(--faint); }
+  .idea__btn {
+    width:100%; text-align:left; display:grid;
+    grid-template-columns:auto 1fr auto; align-items:baseline; gap:1.2rem;
+    padding-block:clamp(1.6rem, 4vw, 2.4rem);
+    transition:padding-inline 0.6s var(--ease);
+  }
+  .idea__no { font-size:0.78rem; color:var(--dim); font-variant-numeric:tabular-nums; }
+  .idea__main { grid-column:2; }
+  .idea__name {
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(1.8rem, 6vw, 3.4rem); line-height:1.05;
+    transition:color 0.45s var(--ease);
+  }
+  .idea__essence { color:var(--dim); font-size:clamp(0.9rem,2.2vw,1.05rem); margin-top:0.5rem; max-width:46ch; }
+  .idea__toggle {
+    align-self:center; width:1.4rem; height:1.4rem; position:relative; flex:none;
+  }
+  .idea__toggle::before, .idea__toggle::after {
+    content:""; position:absolute; top:50%; left:50%; background:var(--dim);
+    transition:transform 0.5s var(--ease), background 0.45s;
+  }
+  .idea__toggle::before { width:1.1rem; height:1px; transform:translate(-50%,-50%); }
+  .idea__toggle::after  { width:1px; height:1.1rem; transform:translate(-50%,-50%); }
+  .idea.is-open .idea__toggle::after { transform:translate(-50%,-50%) scaleY(0); }
+  .idea.is-open .idea__name { color:var(--accent); }
+  .idea.is-open .idea__toggle::before { background:var(--accent); }
+
+  .idea__panel { overflow:hidden; height:0; }
+  .idea__panel-inner {
+    padding:0 0 clamp(1.8rem,4vw,2.6rem) 0; max-width:54ch;
+    display:grid; gap:1rem;
+  }
+  .idea__desc { color:var(--fg); font-size:clamp(1rem, 2.4vw, 1.2rem); line-height:1.7; }
+  .idea__quote { font-family:var(--serif); font-style:italic; color:var(--accent); font-size:clamp(1.05rem,2.6vw,1.35rem); line-height:1.4; }
+  .idea__note { font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--dim); }
+
+  @media (hover:hover) {
+    .idea__btn:hover { padding-inline-start:clamp(0.5rem,2vw,1.5rem); }
+    .idea__btn:hover .idea__name { color:var(--accent); }
+    .idea__btn:hover .idea__toggle::before, .idea__btn:hover .idea__toggle::after { background:var(--accent); }
+  }
+
+  /* ============================================================
+     ABOUT
+     ============================================================ */
+  .about { border-top:1px solid var(--faint); }
+  .about__lines p {
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(1.7rem, 6vw, 3.4rem); line-height:1.18;
+  }
+  .about__lines p.accent { color:var(--accent); font-weight:500; }
+  .about__lines p.small { color:var(--dim); font-style:italic; font-size:clamp(1.3rem,4vw,2.2rem); }
+  .about__disc {
+    margin-top:clamp(2.5rem, 6vw, 4rem); padding-top:1.6rem; border-top:1px solid var(--faint);
+    font-size:0.82rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--dim);
+    line-height:2;
+  }
+
+  /* ============================================================
+     CONTACT
+     ============================================================ */
+  .contact { border-top:1px solid var(--faint); text-align:center; }
+  .contact__ethos {
+    font-family:var(--serif); font-style:italic; color:var(--dim);
+    font-size:clamp(1.1rem, 3vw, 1.6rem); line-height:1.5; margin-bottom:clamp(3rem,8vw,5rem);
+  }
+  .contact__ethos em { color:var(--accent); font-style:italic; }
+  .contact h2 {
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2.4rem, 9vw, 6rem); line-height:1.05;
+  }
+  .contact__btn {
+    display:inline-block; margin-top:clamp(2rem,5vw,3rem);
+    font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase;
+    padding:1.1rem 2.6rem; border:1px solid var(--faint); border-radius:100px;
+    transition:border-color 0.5s var(--ease), color 0.5s var(--ease), background 0.5s var(--ease);
+  }
+  .contact__btn:hover, .contact__btn:focus-visible { border-color:var(--accent); color:var(--accent); }
+  .contact__links {
+    margin-top:clamp(2.5rem,6vw,3.5rem); display:flex; justify-content:center; gap:2rem; flex-wrap:wrap;
+    font-size:0.9rem; color:var(--dim);
+  }
+  .contact__links a { position:relative; }
+  .contact__links a::after { content:""; position:absolute; left:0; bottom:-3px; height:1px; width:0; background:var(--accent); transition:width 0.45s var(--ease); }
+  .contact__links a:hover::after { width:100%; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer {
+    padding:clamp(2.5rem,5vw,3.5rem) var(--pad); border-top:1px solid var(--faint);
+    display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+    font-size:0.78rem; color:var(--dim); letter-spacing:0.04em;
+  }
+  .footer__mark { font-family:var(--serif); color:var(--fg); font-size:0.95rem; }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width:560px) {
+    .nav__brand { font-size:0.95rem; }
+    .nav__menu { gap:0.9rem; }
+    .idea__btn { grid-template-columns:auto 1fr; }
+    .idea__toggle { grid-column:1; grid-row:1; justify-self:end; }
+    .idea__no { display:none; }
+    .idea__main { grid-column:1 / -1; }
+  }
+
+  @media (prefers-reduced-motion:reduce) {
+    html { scroll-behavior:auto; }
+    .js [data-anim] { opacity:1 !important; transform:none !important; }
+    * { transition-duration:0.01ms !important; }
+  }
+</style>
 </head>
 <body>
-  <!-- Custom cursor -->
-  <div class="cursor" aria-hidden="true">
-    <div class="cursor__dot"></div>
-    <div class="cursor__ring"></div>
-    <span class="cursor__label"></span>
-  </div>
 
-  <!-- Page loader -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader__inner">
-      <div class="loader__count"><span id="loaderCount">0</span><i>%</i></div>
-      <div class="loader__name">
-        <span class="loader__line"><em>Aria</em></span>
-        <span class="loader__line"><em>Solenne</em></span>
+<header class="nav">
+  <a href="#top" class="nav__brand">Kristian Bundgaard</a>
+  <nav class="nav__menu" aria-label="Primary">
+    <a href="#ideas" class="nav__link">Ideas</a>
+    <span class="nav__sep" aria-hidden="true">·</span>
+    <a href="#about" class="nav__link">About</a>
+    <span class="nav__sep" aria-hidden="true">·</span>
+    <a href="#contact" class="nav__link">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Introduction">
+    <div class="wrap">
+      <p class="hero__q" data-anim>What does the world need more of?</p>
+      <h1 class="hero__a" data-anim>Health.</h1>
+      <div class="hero__name">
+        <b data-anim>Kristian Bundgaard</b>
+        <span data-anim>Ideamaker</span>
       </div>
     </div>
-    <div class="loader__bar"><span id="loaderBar"></span></div>
-  </div>
+  </section>
 
-  <!-- Progress scrollbar -->
-  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
-
-  <!-- WebGL canvas -->
-  <canvas id="gl" class="gl-canvas" aria-hidden="true"></canvas>
-
-  <!-- Noise overlay -->
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- Navigation -->
-  <header class="nav" id="nav">
-    <a href="#top" class="nav__brand" data-cursor="Home">
-      <span class="nav__mark">AS</span>
-      <span class="nav__brand-text">Aria Solenne</span>
-    </a>
-    <nav class="nav__menu" aria-label="Primary">
-      <a href="#work" class="nav__link" data-cursor="View">Work</a>
-      <a href="#about" class="nav__link" data-cursor="Read">Studio</a>
-      <a href="#services" class="nav__link" data-cursor="Explore">Services</a>
-      <a href="#contact" class="nav__link nav__link--cta" data-cursor="Say hi">Let's talk</a>
-    </nav>
-    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <nav class="mobile-menu__nav">
-      <a href="#work" class="mobile-menu__link"><span>01</span>Work</a>
-      <a href="#about" class="mobile-menu__link"><span>02</span>Studio</a>
-      <a href="#services" class="mobile-menu__link"><span>03</span>Services</a>
-      <a href="#contact" class="mobile-menu__link"><span>04</span>Contact</a>
-    </nav>
-    <div class="mobile-menu__foot">
-      <a href="mailto:hello@ariasolenne.studio">hello@ariasolenne.studio</a>
-      <span>Copenhagen — Remote</span>
+  <!-- CREDO -->
+  <section class="credo" aria-label="Credo">
+    <div class="wrap">
+      <div class="credo__inner">
+        <p class="dim" data-anim>Technology can only give answers.</p>
+        <p class="dim" data-anim>My work is to understand the questions.</p>
+        <p class="turn" data-anim>I don't build answers. I build <em>better questions.</em></p>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="hero__meta">
-        <span class="hero__meta-item" data-reveal>Independent Designer</span>
-        <span class="hero__meta-item" data-reveal>Est. 2016 · Copenhagen</span>
+  <!-- IDEAS -->
+  <section class="ideas" id="ideas" aria-label="The ideas">
+    <div class="wrap">
+      <div class="ideas__head">
+        <h2 data-anim>The ideas</h2>
+        <p data-anim>Same truth. Different forms.</p>
       </div>
 
-      <h1 class="hero__title">
-        <span class="hero__line"><span class="hero__word" data-stagger>Designing</span></span>
-        <span class="hero__line"><span class="hero__word hero__word--italic" data-stagger>interfaces</span></span>
-        <span class="hero__line"><span class="hero__word" data-stagger>&amp;</span> <span class="hero__word" data-stagger>feeling.</span></span>
-      </h1>
-
-      <div class="hero__bottom">
-        <p class="hero__intro" data-reveal>
-          I'm Aria — a UI/UX designer shaping products people
-          genuinely love to use. Clarity first, soul always.
-        </p>
-        <a href="#work" class="hero__scroll" data-cursor="Scroll">
-          <span>Selected work</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-        </a>
-      </div>
-    </section>
-
-    <!-- MARQUEE -->
-    <section class="marquee" aria-hidden="true">
-      <div class="marquee__track" id="marquee">
-        <span>Product Design</span><span class="marquee__dot">✦</span>
-        <span>Design Systems</span><span class="marquee__dot">✦</span>
-        <span>Interaction</span><span class="marquee__dot">✦</span>
-        <span>Brand</span><span class="marquee__dot">✦</span>
-        <span>Prototyping</span><span class="marquee__dot">✦</span>
-        <span>Product Design</span><span class="marquee__dot">✦</span>
-        <span>Design Systems</span><span class="marquee__dot">✦</span>
-        <span>Interaction</span><span class="marquee__dot">✦</span>
-        <span>Brand</span><span class="marquee__dot">✦</span>
-        <span>Prototyping</span><span class="marquee__dot">✦</span>
-      </div>
-    </section>
-
-    <!-- ABOUT / INTRO -->
-    <section class="intro" id="about">
-      <p class="intro__lead">
-        <span data-line>For eight years I've helped founders, studios and</span>
-        <span data-line>teams turn complex ideas into interfaces that feel</span>
-        <span data-line><em>effortless</em>. Design, to me, is empathy made</span>
-        <span data-line>visible — every pixel earning its place.</span>
-      </p>
-      <div class="intro__stats">
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="120">0</div>
-          <div class="stat__label">Products shipped</div>
-        </div>
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="40">0</div>
-          <div class="stat__label">Happy clients</div>
-        </div>
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="11">0</div>
-          <div class="stat__label">Awards &amp; honors</div>
+      <div class="idea" data-anim>
+        <button class="idea__btn" aria-expanded="false">
+          <span class="idea__no">01</span>
+          <span class="idea__main">
+            <span class="idea__name">Claire</span>
+            <span class="idea__essence">The internet solved information. AI solves execution. Claire solves judgement.</span>
+          </span>
+          <span class="idea__toggle" aria-hidden="true"></span>
+        </button>
+        <div class="idea__panel">
+          <div class="idea__panel-inner">
+            <p class="idea__desc">A decision clarity engine. Not a chatbot. For the moment something actually matters — when the choice is yours and the cost is real.</p>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- WORK -->
-    <section class="work" id="work">
-      <div class="section-head">
-        <span class="section-head__index">/01</span>
-        <h2 class="section-head__title" data-reveal>Selected Work</h2>
-        <span class="section-head__note" data-reveal>2021 — 2026</span>
+      <div class="idea" data-anim>
+        <button class="idea__btn" aria-expanded="false">
+          <span class="idea__no">02</span>
+          <span class="idea__main">
+            <span class="idea__name">The Daily Reader</span>
+            <span class="idea__essence">Better form. Better reading. Better world.</span>
+          </span>
+          <span class="idea__toggle" aria-hidden="true"></span>
+        </button>
+        <div class="idea__panel">
+          <div class="idea__panel-inner">
+            <p class="idea__desc">Any content, transformed into something people can actually read and understand. The same truth — given the form it deserves.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="projects" id="projects">
-        <a class="project" href="#" data-cursor="Open" data-color="#e8553f">
-          <div class="project__row">
-            <span class="project__index">01</span>
-            <h3 class="project__name">Lumen Health</h3>
-            <span class="project__tag">Mobile App · 2025</span>
-            <span class="project__arrow">↗</span>
+      <div class="idea" data-anim>
+        <button class="idea__btn" aria-expanded="false">
+          <span class="idea__no">03</span>
+          <span class="idea__main">
+            <span class="idea__name">The Human Renaissance</span>
+            <span class="idea__essence">We're not being replaced. We're being promoted.</span>
+          </span>
+          <span class="idea__toggle" aria-hidden="true"></span>
+        </button>
+        <div class="idea__panel">
+          <div class="idea__panel-inner">
+            <p class="idea__desc">A book. ~20 pages. The idea in its purest form — a map for the move from an economy of muscles and brains to one of hearts and hands.</p>
+            <p class="idea__quote">“We are the witnesses. And without a witness, the universe is just math in the dark.”</p>
+            <span class="idea__note">Work in progress</span>
           </div>
-        </a>
-        <a class="project" href="#" data-cursor="Open" data-color="#3f7be8">
-          <div class="project__row">
-            <span class="project__index">02</span>
-            <h3 class="project__name">Northwind Bank</h3>
-            <span class="project__tag">Fintech · 2024</span>
-            <span class="project__arrow">↗</span>
-          </div>
-        </a>
-        <a class="project" href="#" data-cursor="Open" data-color="#1faa6b">
-          <div class="project__row">
-            <span class="project__index">03</span>
-            <h3 class="project__name">Atlas Design System</h3>
-            <span class="project__tag">Design System · 2024</span>
-            <span class="project__arrow">↗</span>
-          </div>
-        </a>
-        <a class="project" href="#" data-cursor="Open" data-color="#b14ae8">
-          <div class="project__row">
-            <span class="project__index">04</span>
-            <h3 class="project__name">Verde Commerce</h3>
-            <span class="project__tag">E-commerce · 2023</span>
-            <span class="project__arrow">↗</span>
-          </div>
-        </a>
-        <a class="project" href="#" data-cursor="Open" data-color="#e8a83f">
-          <div class="project__row">
-            <span class="project__index">05</span>
-            <h3 class="project__name">Cadence Music</h3>
-            <span class="project__tag">Web Platform · 2022</span>
-            <span class="project__arrow">↗</span>
-          </div>
-        </a>
-        <!-- floating image preview -->
-        <div class="project-preview" id="projectPreview" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="services" id="services">
-      <div class="section-head">
-        <span class="section-head__index">/02</span>
-        <h2 class="section-head__title" data-reveal>What I do</h2>
-        <span class="section-head__note" data-reveal>Capabilities</span>
+        </div>
       </div>
 
-      <div class="services__grid">
-        <article class="service" data-reveal>
-          <div class="service__no">01</div>
-          <h3 class="service__title">Product Design</h3>
-          <p class="service__desc">End-to-end design from research and wireframes to polished, production-ready interfaces that ship.</p>
-          <ul class="service__list"><li>UX Research</li><li>Wireframing</li><li>UI Design</li></ul>
-        </article>
-        <article class="service" data-reveal>
-          <div class="service__no">02</div>
-          <h3 class="service__title">Design Systems</h3>
-          <p class="service__desc">Scalable, token-driven systems that keep teams fast and products consistent across platforms.</p>
-          <ul class="service__list"><li>Component Libraries</li><li>Tokens</li><li>Documentation</li></ul>
-        </article>
-        <article class="service" data-reveal>
-          <div class="service__no">03</div>
-          <h3 class="service__title">Motion &amp; Prototyping</h3>
-          <p class="service__desc">Interaction design and high-fidelity prototypes that make products feel alive before a line of code.</p>
-          <ul class="service__list"><li>Micro-interactions</li><li>Prototyping</li><li>Handoff</li></ul>
-        </article>
-        <article class="service" data-reveal>
-          <div class="service__no">04</div>
-          <h3 class="service__title">Creative Direction</h3>
-          <p class="service__desc">Brand-to-product vision that ties identity, voice and experience into one coherent whole.</p>
-          <ul class="service__list"><li>Art Direction</li><li>Brand</li><li>Strategy</li></ul>
-        </article>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about" aria-label="About">
+    <div class="wrap">
+      <div class="about__lines">
+        <p data-anim>I create things.</p>
+        <p data-anim>The approach is intentional play.</p>
+        <p data-anim>Mediums vary according to message.</p>
+        <p class="small" data-anim>But one ambition:</p>
+        <p class="accent" data-anim>Health.</p>
       </div>
-    </section>
-
-    <!-- QUOTE / PHILOSOPHY -->
-    <section class="quote">
-      <blockquote class="quote__text">
-        <span data-line>“Good design is</span>
-        <span data-line>invisible — it</span>
-        <span data-line><em>disappears</em> into</span>
-        <span data-line>the experience.”</span>
-      </blockquote>
-    </section>
-
-    <!-- CONTACT / CTA -->
-    <section class="contact" id="contact">
-      <span class="contact__pre" data-reveal>Have a project in mind?</span>
-      <a href="mailto:hello@ariasolenne.studio" class="contact__cta" data-cursor="Email" id="contactCta">
-        <span class="contact__cta-line">Let's create</span>
-        <span class="contact__cta-line contact__cta-line--italic">something great</span>
-      </a>
-      <div class="contact__details">
-        <a href="mailto:hello@ariasolenne.studio" data-cursor="Copy">hello@ariasolenne.studio</a>
-        <span>Currently booking Q3 2026</span>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer__top">
-      <div class="footer__brand">Aria Solenne</div>
-      <div class="footer__socials">
-        <a href="#" data-cursor="Follow">Instagram</a>
-        <a href="#" data-cursor="Follow">Dribbble</a>
-        <a href="#" data-cursor="Follow">LinkedIn</a>
-        <a href="#" data-cursor="Follow">Twitter</a>
+      <div class="about__disc" data-anim>
+        Concept Development · Creative Direction · Strategy · Design · Writing
       </div>
     </div>
-    <div class="footer__bottom">
-      <span>© 2026 Aria Solenne Studio</span>
-      <span class="footer__time" id="localTime">—</span>
-      <button class="footer__top-btn" id="backTop" data-cursor="Top">Back to top ↑</button>
-    </div>
-  </footer>
+  </section>
 
-  <!-- Libraries (vendored locally — no external dependencies) -->
-  <script src="js/vendor/gsap.min.js"></script>
-  <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vendor/lenis.min.js"></script>
-  <script src="js/vendor/three.min.js"></script>
-  <script src="js/webgl.js"></script>
-  <script src="js/main.js"></script>
+  <!-- CONTACT -->
+  <section class="contact" id="contact" aria-label="Contact">
+    <div class="wrap">
+      <p class="contact__ethos" data-anim>Sacred, but never solemn.<br />The only thing I take seriously is <em>play.</em></p>
+      <h2 data-anim>An idea worth sharing?</h2>
+      <a class="contact__btn" href="https://kristianbundgaard.com" target="_blank" rel="noopener" data-anim>Get in touch</a>
+      <div class="contact__links" data-anim>
+        <a href="https://kristianbundgaard.com" target="_blank" rel="noopener">kristianbundgaard.com</a>
+        <a href="https://instagram.com/kridi" target="_blank" rel="noopener">Instagram — @kridi</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span class="footer__mark">Kristian Bundgaard</span>
+  <span>Same truth. Different forms.</span>
+  <span>© 2026</span>
+</footer>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  document.documentElement.classList.add("js");
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = typeof gsap !== "undefined";
+  if (hasGSAP && typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+  function ready() {
+    if (!hasGSAP || reduce) {
+      // No animation: just show everything
+      document.querySelectorAll("[data-anim]").forEach(function (el) { el.style.opacity = 1; });
+      initAccordion();
+      return;
+    }
+
+    // ---- Hero: slow, deliberate staggered fade-in on load ----
+    var hero = gsap.utils.toArray(".hero [data-anim]");
+    gsap.set(hero, { y: 24 });
+    var tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.6 } });
+    tl.to(".hero__q", { opacity: 1, y: 0 }, 0.2)
+      .to(".hero__a", { opacity: 1, y: 0 }, 0.9)
+      .to(".hero__name [data-anim]", { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 1.7);
+
+    // ---- Scroll-triggered reveals: each element enters quietly ----
+    gsap.utils.toArray("[data-anim]").forEach(function (el) {
+      if (el.closest(".hero")) return; // hero handled above
+      gsap.set(el, { y: 28 });
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 1.3, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 88%" }
+      });
+    });
+
+    initAccordion();
+  }
+
+  // ---- Accordion: smooth height expand, one open at a time ----
+  function initAccordion() {
+    var ideas = Array.prototype.slice.call(document.querySelectorAll(".idea"));
+
+    function toggle(node, open) {
+      var panel = node.querySelector(".idea__panel");
+      var inner = node.querySelector(".idea__panel-inner");
+      node.classList.toggle("is-open", open);
+      node.querySelector(".idea__btn").setAttribute("aria-expanded", open ? "true" : "false");
+      if (hasGSAP && !reduce) {
+        gsap.to(panel, {
+          height: open ? inner.offsetHeight : 0, duration: 0.6, ease: "power2.inOut",
+          onComplete: function () { if (open) panel.style.height = "auto"; }
+        });
+      } else {
+        panel.style.height = open ? "auto" : "0px";
+      }
+    }
+
+    ideas.forEach(function (idea) {
+      idea.querySelector(".idea__btn").addEventListener("click", function () {
+        var willOpen = !idea.classList.contains("is-open");
+        ideas.forEach(function (other) {
+          if (other !== idea && other.classList.contains("is-open")) toggle(other, false);
+        });
+        toggle(idea, willOpen);
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ready);
+  } else { ready(); }
+})();
+</script>
 </body>
 </html>
