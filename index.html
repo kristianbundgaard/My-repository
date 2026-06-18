@@ -35,7 +35,7 @@
     --fg:    #17150F;     /* warm near-black */
     --dim:   #6f6859;     /* muted secondary text */
     --faint: #d8cfbd;     /* hairlines */
-    --accent:#DB8043;     /* warm sunset / sunrise — used sparingly */
+    --accent:#EE7A33;     /* warm sunset / sunrise — used sparingly */
 
     --serif: "Playfair Display", Georgia, "Times New Roman", serif;
     --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -122,15 +122,21 @@
   /* ============================================================
      CREDO
      ============================================================ */
-  .credo { border-top:1px solid var(--faint); }
-  .credo__inner { max-width:24ch; }
-  .credo p {
-    font-family:var(--serif); font-weight:400; line-height:1.3;
-    font-size:clamp(1.6rem, 5vw, 3rem);
+  .credo { border-top:1px solid var(--faint); padding-block:clamp(3rem,8vh,6rem); overflow-x:clip; }
+  /* Each statement gets its own breathing room and alternates side.
+     Uniform typography — all statements are treated as equals. */
+  .credo__line { display:flex; min-height:42svh; align-items:center; }
+  .credo__line--left  { justify-content:flex-start; text-align:left; }
+  .credo__line--right { justify-content:flex-end;   text-align:right; }
+  .credo__line p {
+    font-family:var(--serif); font-weight:400; font-style:italic;
+    line-height:1.28; font-size:clamp(1.7rem, 5vw, 3rem); max-width:17ch;
   }
-  .credo p + p { margin-top:0.9rem; }
-  .credo .dim { color:var(--dim); font-size:clamp(1.15rem, 3vw, 1.7rem); font-style:italic; }
-  .credo .turn em { font-style:italic; color:var(--accent); }
+  .credo__line em { font-style:italic; color:var(--accent); }
+  @media (max-width:560px) {
+    .credo__line { min-height:34svh; }
+    .credo__line p { max-width:13ch; }
+  }
 
   /* ============================================================
      IDEAS
@@ -213,16 +219,16 @@
     font-family:var(--serif); font-weight:400;
     font-size:clamp(2.4rem, 9vw, 6rem); line-height:1.05;
   }
-  /* Get-in-touch button — fill sweep + label swap to the Instagram handle */
+  /* Contact button — neutral fill sweep + label swap to the Instagram handle */
   .contact__btn {
     position:relative; isolation:isolate; overflow:hidden;
     display:inline-block; margin-top:clamp(2rem,5vw,3rem);
     font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--fg);
-    padding:1.15rem 2.8rem; min-width:15rem; border:1px solid var(--accent); border-radius:100px;
+    padding:1.15rem 2.8rem; min-width:15rem; border:1px solid var(--fg); border-radius:100px;
     transition:color 0.5s var(--ease);
   }
   .contact__btn .btn__fill {
-    position:absolute; inset:0; z-index:-1; background:var(--accent);
+    position:absolute; inset:0; z-index:-1; background:var(--fg);
     transform:translateY(101%); border-radius:inherit;
     transition:transform 0.6s var(--ease);
   }
@@ -291,7 +297,6 @@
       <p class="hero__q" data-anim>What does the world need more of?</p>
       <h1 class="hero__a" data-anim>Health.</h1>
       <div class="hero__name">
-        <b data-anim>Kristian Bundgaard</b>
         <span data-anim>Ideamaker</span>
       </div>
     </div>
@@ -300,11 +305,11 @@
   <!-- CREDO -->
   <section class="credo" aria-label="Credo">
     <div class="wrap">
-      <div class="credo__inner">
-        <p class="dim" data-anim>Technology can only give answers.</p>
-        <p class="dim" data-anim>My work is to understand the questions.</p>
-        <p class="turn" data-anim>I don't build answers. I build <em>better questions.</em></p>
-      </div>
+      <div class="credo__line credo__line--left"><p data-anim>Technology can only give <em>answers</em>.</p></div>
+      <div class="credo__line credo__line--right"><p data-anim>My work is to understand the <em>questions</em>.</p></div>
+      <div class="credo__line credo__line--left"><p data-anim>I don't build answers. I build <em>better questions</em>.</p></div>
+      <div class="credo__line credo__line--right"><p data-anim>Lift human health by a single <em>percent</em>,</p></div>
+      <div class="credo__line credo__line--left"><p data-anim>and the whole world <em>compounds</em>.</p></div>
     </div>
   </section>
 
@@ -391,7 +396,7 @@
       <a class="contact__btn" href="https://instagram.com/kridi" target="_blank" rel="noopener" aria-label="Get in touch on Instagram, @kridi" data-anim>
         <span class="btn__fill" aria-hidden="true"></span>
         <span class="btn__text" aria-hidden="true">
-          <span class="btn__line btn__line--in">Get in touch</span>
+          <span class="btn__line btn__line--in">Contact me</span>
           <span class="btn__line btn__line--out">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
             <span>@kridi</span>
@@ -435,9 +440,21 @@
       .to(".hero__a", { opacity: 1, y: 0 }, 0.9)
       .to(".hero__name [data-anim]", { opacity: 1, y: 0, duration: 1.2, stagger: 0.15 }, 1.7);
 
+    // ---- Credo: each statement arrives on its own, drifting from its side ----
+    gsap.utils.toArray(".credo__line").forEach(function (line) {
+      var p = line.querySelector("p");
+      var fromLeft = line.classList.contains("credo__line--left");
+      gsap.set(p, { x: fromLeft ? -48 : 48, y: 12 });
+      gsap.to(p, {
+        opacity: 1, x: 0, y: 0, duration: 1.5, ease: "power3.out",
+        scrollTrigger: { trigger: line, start: "top 78%" }
+      });
+    });
+
     // ---- Scroll-triggered reveals: each element enters quietly ----
     gsap.utils.toArray("[data-anim]").forEach(function (el) {
-      if (el.closest(".hero")) return; // hero handled above
+      if (el.closest(".hero")) return;  // hero handled above
+      if (el.closest(".credo")) return; // credo handled above
       gsap.set(el, { y: 28 });
       gsap.to(el, {
         opacity: 1, y: 0, duration: 1.3, ease: "power3.out",
