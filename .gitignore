@@ -1,5 +1,7 @@
-# Dependencies
+# Dependencies (Playwright verification tooling only — not part of the site)
 node_modules/
+package.json
+package-lock.json
 
 # OS / editor
 .DS_Store
@@ -10,5 +12,7 @@ Thumbs.db
 
 # Local test artifacts
 shot-*.png
+doc-*.png
 verify.mjs
 debug.mjs
+docshot.mjs
